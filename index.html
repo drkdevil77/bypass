@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b12">
+<title>Wraith's Audio Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="ambient a1"></div><div class="ambient a2"></div>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-mark">W<span>✳</span></span><span>WRAITH'S <b>AUDIO STUDIO</b></span></a>
+  <div class="top-right"><span class="status-dot"></span> LOCAL PROCESSING <span class="version">BETA 01</span></div>
+</header>
+<main>
+  <section class="hero">
+    <div class="eyebrow"><span class="eyebrow-line"></span> YOUR SOUND, YOUR RULES</div>
+    <h1>Make noise.<br><span>Make it yours.</span></h1>
+    <p>A clean little audio lab for layering tracks, shaping space, and exporting your sound. Your files stay in your browser.</p>
+    <div class="hero-tags"><span>✳ NO ACCOUNT</span><span>↗ WAV EXPORT</span><span>◉ BROWSER-BASED</span></div>
+  </section>
+  <section class="workspace">
+    <div class="section-heading"><div><span class="section-index">01 / INPUT</span><h2>Bring your tracks</h2></div><span class="subtle">MP3 · WAV · OGG · M4A*</span></div>
+    <div class="track-grid">
+      <label class="track-card" for="introFile">
+        <div class="track-top"><span class="track-icon">◖</span><span class="track-number">TRACK A</span><span class="track-badge">INTRO / VOICE</span></div>
+        <div class="drop-zone" id="introDrop"><div class="upload-symbol">＋</div><strong id="introName">Drop an audio file here</strong><span id="introMeta">or click to browse your device</span><div class="file-bar"><span id="introBar"></span></div></div>
+        <input id="introFile" type="file" accept="audio/*" hidden>
+        <div class="track-foot"><span>01</span><span>INTRO / VOICE TRACK</span><span id="introDuration">--:--</span></div>
+      </label>
+      <label class="track-card" for="musicFile">
+        <div class="track-top"><span class="track-icon music-icon">♫</span><span class="track-number">TRACK B</span><span class="track-badge blue">MUSIC / BACKGROUND</span></div>
+        <div class="drop-zone" id="musicDrop"><div class="upload-symbol">＋</div><strong id="musicName">Drop an audio file here</strong><span id="musicMeta">or click to browse your device</span><div class="file-bar"><span id="musicBar"></span></div></div>
+        <input id="musicFile" type="file" accept="audio/*" hidden>
+        <div class="track-foot"><span>02</span><span>MUSIC / BACKGROUND TRACK</span><span id="musicDuration">--:--</span></div>
+      </label>
+    </div>
+    <div class="tip"><span>ⓘ</span> Choose one track to preview and process at a time. Use audio you own or have permission to edit and publish.</div>
+  </section>
+  <section class="workspace processing">
+    <div class="section-heading"><div><span class="section-index">02 / SOUND DESIGN</span><h2>Shape the output</h2></div><span class="live-chip"><span class="status-dot"></span> LIVE SETTINGS</span></div>
+    <div class="track-select-row">
+      <label for="activeTrack">TRACK TO EDIT</label>
+      <select id="activeTrack"><option value="intro">Track A · Intro / voice</option><option value="music">Track B · Music / background</option></select>
+      <button id="livePreviewBtn" class="ghost-btn" disabled>▶ LIVE PREVIEW</button>
+      <button id="stopPreviewBtn" class="ghost-btn" disabled>■ STOP</button>
+      <span id="previewStatus" class="preview-status">Upload a track to begin</span>
+    </div>
+    <div class="controls">
+      <div class="control-card">
+        <div class="control-label"><span>OUTPUT GAIN</span><strong id="gainValue">+2.0 dB</strong></div>
+        <input id="gain" type="range" min="-12" max="12" step="0.5" value="2">
+        <div class="range-labels"><span>-12 dB</span><span>0 dB</span><span>+12 dB</span></div>
+      </div>
+      <div class="control-card">
+        <div class="control-label"><span>REVERB MIX</span><strong id="reverbValue">45%</strong></div>
+        <input id="reverb" type="range" min="0" max="100" step="1" value="45">
+        <div class="range-labels"><span>DRY</span><span>ROOM</span><span>WET</span></div>
+      </div>
+      <div class="control-card">
+        <div class="control-label"><span>REVERB DECAY</span><strong id="spaceValue">2.4 s</strong></div>
+        <input id="space" type="range" min="0.4" max="6" step="0.1" value="2.4">
+        <div class="range-labels"><span>SHORT</span><span>AMBIENT</span><span>LONG</span></div>
+      </div>
+      <div class="control-card">
+        <div class="control-label"><span>PLAYBACK SPEED</span><strong id="speedValue">1.00×</strong></div>
+        <input id="speed" type="range" min="0.5" max="1.5" step="0.01" value="1">
+        <div class="range-labels"><span>0.5×</span><span>1×</span><span>1.5×</span></div>
+      </div>
+      <div class="control-card">
+        <div class="control-label"><span>PITCH SHIFT</span><strong id="pitchValue">0 semitones</strong></div>
+        <input id="pitch" type="range" min="-12" max="12" step="1" value="0">
+        <div class="range-labels"><span>-12 st</span><span>Original</span><span>+12 st</span></div>
+        <p class="control-note">Pitch changes playback rate and therefore also changes duration.</p>
+      </div>
+      <div class="control-card">
+        <div class="control-label"><span>LOW-PASS FILTER</span><strong id="filterValue">20 kHz</strong></div>
+        <input id="filter" type="range" min="500" max="20000" step="100" value="20000">
+        <div class="range-labels"><span>DARK</span><span>WARM</span><span>BRIGHT</span></div>
+      </div>
+      <div class="control-card">
+        <div class="control-label"><span>ECHO AMOUNT</span><strong id="echoValue">0%</strong></div>
+        <input id="echo" type="range" min="0" max="50" step="1" value="0">
+        <div class="range-labels"><span>OFF</span><span>SUBTLE</span><span>DEEP</span></div>
+      </div>
+      <div class="control-card">
+        <div class="control-label"><span>ECHO TIME</span><strong id="echoTimeValue">280 ms</strong></div>
+        <input id="echoTime" type="range" min="80" max="700" step="10" value="280">
+        <div class="range-labels"><span>SLAP</span><span>MEDIUM</span><span>LONG</span></div>
+      </div>
+    </div>
+    <div class="export-row">
+      <div class="export-copy"><div class="export-icon">↗</div><div><strong>Ready when you are.</strong><span>Process the selected track with live effects and export a WAV.</span></div></div>
+      <button id="processBtn" class="primary-btn" disabled><span>✦</span> PROCESS AUDIO <span class="btn-arrow">↗</span></button>
+    </div>
+    <div id="progressWrap" class="progress-wrap" hidden><div class="progress-head"><span id="progressText">Preparing audio...</span><span id="progressPct">0%</span></div><div class="progress-track"><span id="progressFill"></span></div></div>
+    <div id="result" class="result" hidden>
+      <div class="result-top"><div><span class="section-index">03 / EXPORT READY</span><h3>Your processed track is ready.</h3><p id="resultMeta">WAV · stereo</p></div><div class="result-mark">✓</div></div>
+      <audio id="preview" controls></audio>
+      <div class="result-actions"><a id="downloadBtn" class="primary-btn download" download="wraiths-processed-audio.wav">↓ DOWNLOAD WAV</a><button id="resetBtn" class="ghost-btn">START OVER ↺</button></div>
+    </div>
+  </section>
+  <footer><span>WRAITH'S AUDIO STUDIO <span class="footer-dot">✳</span></span><span>BUILT FOR CREATORS · PROCESSED LOCALLY</span></footer>
+</main>
+<script src="/app.js"></script>
+</body></html>

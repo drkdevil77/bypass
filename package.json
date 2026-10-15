@@ -1,0 +1,8 @@
+{
+  "name": "wraiths-audio-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser-based audio mixing and processing studio",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
